@@ -47,7 +47,7 @@ class MainViewController: UIViewController, ARSCNViewDelegate {
     
     private lazy var hintLabel: UILabel = {
         let label = UILabel()
-        label.text = "Найдите изображения с отметкой AR из специальной книги о издательском доме «Вечерний Гомель-Медиа». Чтобы их оживить, наведите камеру на фотографию"
+        label.text = "Найдите изображения с отметкой AR из специальной книги об издательском доме «Вечерний Гомель-Медиа». Чтобы их оживить, наведите камеру на фотографию"
         label.numberOfLines = 0
         label.textColor = .black
         label.font = .systemFont(ofSize: 16, weight: .regular)
