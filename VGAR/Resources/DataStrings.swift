@@ -8,5 +8,5 @@
 public struct DataStrings {
     public static let videosLink = "https://neoviso.com/arvideo/vg/"
     public static let examplePhotosLink = "https://neoviso.com/vg/"
-    public static let supportServiceLink = "https://gomelmedia.by/?page=pr&type=contact"
+    public static let supportServiceLink = "http://www.bybook.by/?page=about"
 }
