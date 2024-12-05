@@ -5,22 +5,22 @@
   },
   "resources" : [
     {
-      "filename" : "vag_1.arreferenceimage"
-    },
-    {
-      "filename" : "vag_2.arreferenceimage"
-    },
-    {
-      "filename" : "vag_3.arreferenceimage"
-    },
-    {
-      "filename" : "vag_4.arreferenceimage"
-    },
-    {
-      "filename" : "vag_5.arreferenceimage"
-    },
-    {
       "filename" : "vg_0.arreferenceimage"
+    },
+    {
+      "filename" : "vg_1.arreferenceimage"
+    },
+    {
+      "filename" : "vg_2.arreferenceimage"
+    },
+    {
+      "filename" : "vg_3.arreferenceimage"
+    },
+    {
+      "filename" : "vg_4.arreferenceimage"
+    },
+    {
+      "filename" : "vg_5.arreferenceimage"
     }
   ]
 }
