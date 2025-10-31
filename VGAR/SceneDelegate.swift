@@ -10,24 +10,24 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    private var coordinator: RootCoordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let window = UIWindow(windowScene: windowScene)
-        self.window = window
+        let newWindow = UIWindow(windowScene: windowScene)
+        window = newWindow
         
-        // Создаем LaunchScreenViewController из LaunchScreen.storyboard и добавляем его как корневой контроллер
-        let launchScreenStoryboard = UIStoryboard(name: "LaunchScreen", bundle: nil)
-        if let launchScreenVC = launchScreenStoryboard.instantiateInitialViewController() {
-            window.rootViewController = launchScreenVC
-            window.makeKeyAndVisible()
-            
-            // Задержка в 2 секунды перед переходом на WelcomeGuideViewController
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                let welcomeGuideVC = WelcomeGuideViewController()
-                window.rootViewController = welcomeGuideVC
-            }
-        }
+        //Set ignoring dark theme
+        newWindow.overrideUserInterfaceStyle = .light
+        
+        //Set global appearance configuration
+        //GlobalAppearanceConfigurator().setAppearance()
+        
+        //Set root coordinator and start session
+        coordinator = RootCoordinator(window: newWindow)
+        coordinator?.start()
+       
+        //window?.makeKeyAndVisible()
     }
 }
