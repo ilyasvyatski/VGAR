@@ -28,7 +28,7 @@ class ARScannerInteractor: ARScannerLogic {
     private var isLoadingVideo = false
     private var currentVideoName: String?
     
-    func onViewDidLoad() {}
+    func onViewLoaded() {}
     
     func onViewWillAppear() {
         presenter?.setupARSession()
@@ -66,7 +66,8 @@ class ARScannerInteractor: ARScannerLogic {
             setupVideoNode(
                 on: node,
                 with: cache.scene,
-                imageSize: imageAnchor.referenceImage.physicalSize
+                imageSize: imageAnchor.referenceImage.physicalSize,
+                target: imageName
             )
             
             playVideo(for: imageName, player: cache.player)
@@ -147,7 +148,12 @@ private extension ARScannerInteractor {
                     let cache = VideoCache(player: player, scene: scene)
                     
                     self.videoCache[target] = cache
-                    self.setupVideoNode(on: node, with: scene, imageSize: anchor.referenceImage.physicalSize)
+                    self.setupVideoNode(
+                        on: node,
+                        with: scene,
+                        imageSize: anchor.referenceImage.physicalSize,
+                        target: target
+                    )
                     self.playVideo(for: target, player: player)
                     print("🟢 Load success")
                 }
@@ -178,14 +184,46 @@ private extension ARScannerInteractor {
         
         return scene
     }
+//    
+//    func setupVideoNode(on node: SCNNode, with scene: SKScene, imageSize: CGSize) {
+//        let plane = SCNPlane(width: imageSize.width, height: imageSize.height)
+//        plane.firstMaterial?.diffuse.contents = scene
+//        
+//        let planeNode = SCNNode(geometry: plane)
+//        planeNode.eulerAngles.x = -Float.pi / 2
+//        node.addChildNode(planeNode)
+//    }
     
-    func setupVideoNode(on node: SCNNode, with scene: SKScene, imageSize: CGSize) {
-        let plane = SCNPlane(width: imageSize.width, height: imageSize.height)
+    func setupVideoNode(
+        on node: SCNNode,
+        with scene: SKScene,
+        imageSize: CGSize,
+        target: String? = nil
+    ) {
+        let plane = createVideoPlane(for: target, imageSize: imageSize)
         plane.firstMaterial?.diffuse.contents = scene
         
         let planeNode = SCNNode(geometry: plane)
         planeNode.eulerAngles.x = -Float.pi / 2
         node.addChildNode(planeNode)
+    }
+    
+    func createVideoPlane(for target: String?, imageSize: CGSize) -> SCNPlane {
+        guard let target = target else {
+            return SCNPlane(width: imageSize.width, height: imageSize.height)
+        }
+        
+        switch target {
+        case "vg_1":
+            let videoWidth: CGFloat = 1920.0
+            let videoHeight: CGFloat = 1080.0
+            
+            let scaledHeight = imageSize.height
+            let scaledWidth = (scaledHeight / videoHeight) * videoWidth
+            return SCNPlane(width: scaledWidth, height: scaledHeight)
+        default:
+            return SCNPlane(width: imageSize.width, height: imageSize.height)
+        }
     }
     
     func playVideo(for target: String, player: AVPlayer) {

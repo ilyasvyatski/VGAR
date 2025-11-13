@@ -95,7 +95,7 @@ class ARScannerView: UIViewController, ARScannerPresenting {
         initUI()
         initConstraints()
         
-        interactor?.onViewDidLoad()
+        interactor?.onViewLoaded()
     }
     
     override func viewWillAppear(_ animated: Bool) {

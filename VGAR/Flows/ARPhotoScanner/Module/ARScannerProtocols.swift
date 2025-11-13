@@ -29,7 +29,7 @@ protocol ARScannerPreparing: ConfigurablePresenter {
 }
 
 protocol ARScannerLogic: ConfigurableInteractor {
-    func onViewDidLoad()
+    func onViewLoaded()
     func onViewWillAppear()
     func onViewWillDisappear()
     func onBackButtonTapped()
